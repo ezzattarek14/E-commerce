@@ -4,7 +4,7 @@ DEPI final Project
 
 Typical file system for eCommerce web aplication
 
-# Root structure
+## Root structure
 
 ```
 /ecommerce-app
@@ -41,7 +41,7 @@ Typical file system for eCommerce web aplication
 └── /node_modules # Installed dependencies
 ```
 
-# Backend Structure (Node.js, Express, MongoDB)
+## Backend Structure (Node.js, Express, MongoDB)
 
 ```
 /backend
@@ -83,7 +83,7 @@ Typical file system for eCommerce web aplication
 └── package.json # Backend dependencies (e.g., express, mongoose, bcrypt, etc.)
 ```
 
-# Frontend Structure (React.js)
+## Frontend Structure (React.js)
 
 ```
 /frontend

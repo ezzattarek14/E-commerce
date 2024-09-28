@@ -6,6 +6,7 @@ Typical file system for eCommerce web aplication
 
 # Root structure
 
+```
 /ecommerce-app
 │
 ├── /backend # Backend (Node.js, Express.js, MongoDB)
@@ -38,9 +39,11 @@ Typical file system for eCommerce web aplication
 ├── .gitignore # Ignored files for Git
 ├── README.md # Project documentation
 └── /node_modules # Installed dependencies
+```
 
 # Backend Structure (Node.js, Express, MongoDB)
 
+```
 /backend
 │
 ├── /config
@@ -78,9 +81,11 @@ Typical file system for eCommerce web aplication
 │
 ├── server.js # Main entry point for Express app
 └── package.json # Backend dependencies (e.g., express, mongoose, bcrypt, etc.)
+```
 
 # Frontend Structure (React.js)
 
+```
 /frontend
 ├── /src
 │ ├── /components
@@ -128,3 +133,4 @@ Typical file system for eCommerce web aplication
 │ └── index.js # Entry point (renders the React app)
 │
 └── package.json # Frontend dependencies (React, Axios, Redux, etc.)
+```

@@ -86,7 +86,7 @@ function ReviewSection() {
       <h1 className="font-extrabold text-5xl uppercase mb-10">
         OUR HAPPY CUSTOMERS
       </h1>
-      <Slider {...settings} className="hidden md:block">
+      <Slider {...settings} className="hidden md:block mx-10">
         {data.map((item, index) => (
           <Review
             key={index}
@@ -96,7 +96,7 @@ function ReviewSection() {
           />
         ))}
       </Slider>
-      <Slider {...RespSettings} className="block md:hidden">
+      <Slider {...RespSettings} className="block md:hidden mx-10">
         {data.map((item, index) => (
           <Review
             key={index}

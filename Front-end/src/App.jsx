@@ -1,20 +1,33 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Applayout from "./Components/Applayout";
+import AppLayout from "./Components/Applayout";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
+import Product from "./pages/Product";
+import ProductDetails from "./feature/Products/ProductDetails";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { staleTime: 0 },
+    },
+  });
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Applayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Categories />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

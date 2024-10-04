@@ -10,6 +10,7 @@ import img5 from "../Assets/img5.png";
 import img6 from "../Assets/img6.png";
 import img7 from "../Assets/img7.png";
 import img8 from "../Assets/img8.png";
+
 function Home() {
   const data = [
     { img: img1, price: 200, rating: 4, title: "T-SHIRT WITH TAPE DETAILS" },
@@ -23,6 +24,7 @@ function Home() {
     { img: img7, price: 180, rating: 2, title: "LOOSE FIT BERMUDA SHORTS" },
     { img: img8, price: 130, rating: 5, title: "FADED SKINNY JEANS" },
   ];
+
   return (
     <div>
       <HeroSection />

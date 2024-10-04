@@ -10,7 +10,7 @@ function FooterLinks({ list, title }) {
         {list.map((item, index) => (
           <li
             key={index}
-            className="text-gray-400 text-sm md:text-xl capitalize translate-x-0 hover:translate-x-5 duration-500 ease-in-out transition-all cursor-pointer"
+            className="text-gray-400 text-xs capitalize translate-x-0 hover:translate-x-4 duration-700 ease-in-out transition-all cursor-pointer"
           >
             {item}
           </li>

@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
+import DivMotion from "../../ui/DivMotion";
 
 /* eslint-disable react/prop-types */
 
@@ -82,31 +83,37 @@ function ReviewSection() {
     },
   ];
   return (
-    <div className=" container">
-      <h1 className="font-extrabold text-5xl uppercase mb-10">
-        OUR HAPPY CUSTOMERS
-      </h1>
-      <Slider {...settings} className="hidden md:block mx-10">
-        {data.map((item, index) => (
-          <Review
-            key={index}
-            rating={item.rating}
-            name={item.name}
-            text={item.text}
-          />
-        ))}
-      </Slider>
-      <Slider {...RespSettings} className="block md:hidden mx-10">
-        {data.map((item, index) => (
-          <Review
-            key={index}
-            rating={item.rating}
-            name={item.name}
-            text={item.text}
-          />
-        ))}
-      </Slider>
-    </div>
+    <DivMotion>
+      <div className=" container">
+        <h1 className="font-extrabold text-5xl uppercase mb-10">
+          OUR HAPPY CUSTOMERS
+        </h1>
+        <div className="hidden md:block">
+          <Slider {...settings}>
+            {data.map((item, index) => (
+              <Review
+                key={index}
+                rating={item.rating}
+                name={item.name}
+                text={item.text}
+              />
+            ))}
+          </Slider>
+        </div>
+        <div className="block md:hidden">
+          <Slider {...RespSettings}>
+            {data.map((item, index) => (
+              <Review
+                key={index}
+                rating={item.rating}
+                name={item.name}
+                text={item.text}
+              />
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </DivMotion>
   );
 }
 

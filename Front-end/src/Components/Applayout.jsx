@@ -1,15 +1,56 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useEffect, useState } from "react";
+import logo from "../Assets/logo.png";
 
-function Applayout() {
+function AppLayout() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDelayComplete, setIsDelayComplete] = useState(false);
+
+  const handleLoading = () => {
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      handleLoading();
+      console.log("Document is already ready");
+    } else {
+      window.addEventListener("load", handleLoading);
+      console.log("Event listener added for load event");
+    }
+
+    return () => {
+      window.removeEventListener("load", handleLoading);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const delayTimeout = setTimeout(() => {
+        setIsDelayComplete(true);
+      }, 2000);
+
+      return () => clearTimeout(delayTimeout);
+    }
+  }, [isLoading]);
+
+  if (isLoading || !isDelayComplete)
+    return (
+      <div className="min-h-screen flex items-center justify-center flex-col bg-white">
+        <img className=" animate-pulse mb-5" src={logo} alt="Logo" />
+        <div className="animate-spin rounded-full sm:size-16 size-10 border-t-2 border-b-2 border-mblack"></div>
+      </div>
+    );
+
   return (
-    <div>
+    <>
       <Navbar />
       <Outlet />
       <Footer />
-    </div>
+    </>
   );
 }
 
-export default Applayout;
+export default AppLayout;

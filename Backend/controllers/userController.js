@@ -3,6 +3,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncErrorHandler from "./../utils/asyncErrorHandler.js";
+import CustomError from "../utils/CustomError.js";
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -11,29 +12,40 @@ const signToken = (id) => {
 };
 
 // Route for user login
-const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await userModel.findOne({ email });
-    if (!user) {
-      return res.json({ success: false, message: "user doesn't exists" });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
+const loginUser = asyncErrorHandler(async (req, res, next) => {
+  const { email, password } = req.body;
 
-    if (isMatch) {
-      const token = createToken(user._id);
-      res.json({ success: true, token });
-    } else {
-      res.json({ success: false, message: "invalid credintials" });
-    }
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+  //checks if email & password exist in the request
+  if (!email || !password) {
+    const err = new CustomError(
+      "please provide email address and password to login",
+      400,
+      "error"
+    );
+    next(err);
   }
-};
+  //find user with requested email
+  const user = await userModel.findOne({ email }).select("+password");
+  //checking cridentials
+  if (!user || !(await user.comparePasswords(password, user.password))) {
+    const err = new CustomError(
+      "wrong email or password, please check again...",
+      400,
+      "wrong password/email"
+    );
+    return next(err);
+  }
+  const token = signToken(user._id);
+  res.status(200).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
+  });
+});
 
 // Route for user register
-
 const registerUser = asyncErrorHandler(async (req, res) => {
   const { name, email, password } = req.body;
 

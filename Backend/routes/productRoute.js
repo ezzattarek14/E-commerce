@@ -7,6 +7,7 @@ import {
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 import userAuth from "./../middleware/userAuth.js";
+import permissionGuard from "../middleware/permissionGuard.js";
 
 const productRouter = express.Router();
 
@@ -22,6 +23,6 @@ productRouter.post(
 );
 productRouter.delete("/remove", removeProduct);
 productRouter.post("/single", singleProduct);
-productRouter.get("/list", userAuth, listProduct);
+productRouter.get("/list", userAuth, permissionGuard("admin"), listProduct);
 
 export default productRouter;

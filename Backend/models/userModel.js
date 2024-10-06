@@ -19,7 +19,7 @@ const UserModelSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 6, // Set a minimum password length
+    minlength: 8, // Set a minimum password length
     select: false,
   },
   confirmPassword: {

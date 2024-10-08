@@ -7,6 +7,7 @@ import { useState } from "react";
 import Logo from "../ui/Logo";
 import NavbarLinks from "./NavbarLinks";
 import Sidebar from "../Components/Sidebar";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [close, setClose] = useState(false);
@@ -21,7 +22,9 @@ function Navbar() {
             >
               <IoMenu />
             </div>
-            <Logo />
+            <Link to={"/"}>
+              <Logo />
+            </Link>
           </div>
           <div className="md:block hidden">
             <NavbarLinks />

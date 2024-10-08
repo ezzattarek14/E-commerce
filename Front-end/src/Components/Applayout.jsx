@@ -30,13 +30,14 @@ function AppLayout() {
     if (!isLoading) {
       const delayTimeout = setTimeout(() => {
         setIsDelayComplete(true);
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(delayTimeout);
     }
   }, [isLoading]);
 
   if (isLoading || !isDelayComplete)
+    // if(isLoading)
     return (
       <div className="min-h-screen flex items-center justify-center flex-col bg-white">
         <img className=" animate-pulse mb-5" src={logo} alt="Logo" />

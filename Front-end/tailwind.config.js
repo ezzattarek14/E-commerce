@@ -27,9 +27,6 @@ export default {
       animation: {
         bounce2: "bounce2 3s ease infinite",
       },
-      backgroundImage: {
-        herobg: "url('/src/images/BG.png')",
-      },
     },
   },
   plugins: [],

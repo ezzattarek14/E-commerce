@@ -17,7 +17,7 @@ function Navbar() {
         <div className="flex items-center gap-10">
           <div className="w-36 flex items-center gap-4  ">
             <div
-              className="text-mblack md:hidden"
+              className="text-mblack text-3xl md:hidden"
               onClick={() => setClose(!close)}
             >
               <IoMenu />
@@ -41,13 +41,13 @@ function Navbar() {
           </div>
         </div>
         <div className="flex gap-3">
-          <div className="block md:hidden">
+          <div className="block text-2xl md:hidden">
             <IoSearchOutline />
           </div>
-          <div>
+          <div className="text-2xl ">
             <FiShoppingCart />
           </div>
-          <div>
+          <div className="text-2xl ">
             <FaRegCircleUser />
           </div>
         </div>

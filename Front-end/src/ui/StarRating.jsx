@@ -62,7 +62,7 @@ function StarRating({
       </div>
       <p style={textStyle}>
         {text && (Temprating || `${rating}/` || "")}{" "}
-        <span className="text-mblack">${maxrating}</span>
+        <span className="text-mblack">{maxrating}</span>
       </p>
     </div>
   );

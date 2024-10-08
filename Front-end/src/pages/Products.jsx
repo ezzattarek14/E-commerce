@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
 import { useProducts } from "../feature/Products/useProducts";
 import Spinner from "../ui/Spinner";
 import Pagination from "../ui/Pagination";
 import { useState } from "react";
 import { PAGE_SIZE } from "../utils/constance";
+// import ProductCard from "../feature/Products/ProductCard";
+import ProductsCollection from "../feature/Products/ProductsCollections";
+// import CollectionCard from "../feature/Home/CollectionCard";
 
 function Products() {
   const { Products, isLoading } = useProducts();
@@ -15,18 +17,25 @@ function Products() {
   if (isLoading) return <Spinner />;
   return (
     <>
-      <div className="grid grid-cols-4 container justify-center">
-        {currentPost.map((item) => (
-          <Link to={`/product/${item.id}`} key={item.id}>
-            {item.id}
-          </Link>
-        ))}
+      <div className=" md:px-5 px-5">
+        <ul className="flex  gap-2">
+          <li>{`Home >`}</li>
+          <li>{`Shop >`}</li>
+          <li>{`Men >`}</li>
+        </ul>
       </div>
-      <Pagination
-        totalPost={Products.length}
-        postPage={PAGE_SIZE}
-        setCurrentPage={setCurrentPage}
-      />
+
+      <div className="flex-col gap-10 ">
+        <ProductsCollection products={currentPost}></ProductsCollection>
+
+        <div className=" flex-row justify-center items-center">
+          <Pagination
+            totalPost={Products.length}
+            postPage={PAGE_SIZE}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
+      </div>
     </>
   );
 }

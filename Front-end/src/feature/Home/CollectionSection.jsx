@@ -23,7 +23,7 @@ function CollectionSection({ data, title }) {
           ))}
         </div>
         <Button type={"white"}>
-          <Link to={"/product"}> View All</Link>
+          <Link to={"/products"}> View All</Link>
         </Button>
       </div>
     </DivMotion>

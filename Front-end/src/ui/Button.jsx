@@ -36,6 +36,32 @@ function Button({ children, type, onClick, active }) {
       </button>
     );
   }
+  if (type === "prev/next") {
+    return (
+      <button
+        onClick={onClick}
+        className={
+          "text-mblack border-2 border-gray-200 w-24 flex justify-around items-center rounded-lg font-bold  h-fill px-2 hover:text-white hover:bg-gray-700 hover:border-0 transition duration-100 ease-in-out"
+        }
+      >
+        {children}
+      </button>
+    );
+  }
+  if (type === "pagintaion") {
+    return (
+      <button
+        className={`${
+          active
+            ? "bg-gray-700 rounded-lg text-white p-2 w-10 text-center"
+            : "bg-gray-100 rounded-lg text-black p-2 w-10 text-center hover:bg-gray-300"
+        } transition duration-100 ease-in-out`}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
+  }
 }
 
 export default Button;

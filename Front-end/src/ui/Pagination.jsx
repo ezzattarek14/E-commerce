@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
-
+// import { GoArrowLeft } from "react-icons/go";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+// import { IconContext } from "react-icons";
 import { useSearchParams } from "react-router-dom";
+import Button from "./Button";
+// import { useState } from "react";
 
 function Pagination({ totalPost, postPage, setCurrentPage }) {
   const pages = [];
@@ -9,6 +13,7 @@ function Pagination({ totalPost, postPage, setCurrentPage }) {
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
+  // const [scrollTop, setScrollTop] = useState(0);
 
   const currentPage = !searchParams.get("page")
     ? 1
@@ -21,32 +26,55 @@ function Pagination({ totalPost, postPage, setCurrentPage }) {
     searchParams.set("page", prev);
     setSearchParams(searchParams);
     setCurrentPage(prev);
+    window.scrollTo(0, 0);
   }
   function handleNext() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
     searchParams.set("page", next);
     setSearchParams(searchParams);
     setCurrentPage(next);
+    window.scrollTo(0, 0);
   }
+
   return (
-    <div className=" container flex gap-2 my-4">
-      <button onClick={handlePrev}>prev</button>
-      {pages.map((page, index) => {
-        return (
-          <button
-            onClick={() => {
-              searchParams.set("page", page);
-              setSearchParams(searchParams);
-              setCurrentPage(page);
-            }}
-            className="bg-black text-white p-2 w-5 text-center"
-            key={index}
-          >
-            {page}
-          </button>
-        );
-      })}
-      <button onClick={handleNext}>next</button>
+    // container of Pagination buttons
+    <div className=" container flex my-4 justify-between">
+      {/* prev arrow for Pagination */}
+      <Button type={"prev/next"} onClick={handlePrev}>
+        <span className="">
+          <FaArrowLeft />
+        </span>
+        Prev
+      </Button>
+
+      {/* page numbers buttons */}
+      <div className="w-2/3 flex gap-10 justify-center">
+        {pages.map((page, index) => {
+          return (
+            <Button
+              type={"pagintaion"}
+              onClick={() => {
+                searchParams.set("page", page);
+                setSearchParams(searchParams);
+                setCurrentPage(page);
+                window.scrollTo(0, 0);
+              }}
+              key={index}
+              active={currentPage == index + 1}
+            >
+              {page}
+            </Button>
+          );
+        })}
+      </div>
+
+      {/* next button  */}
+      <Button type={"prev/next"} onClick={handleNext}>
+        Next
+        <span className="">
+          <FaArrowRight />
+        </span>
+      </Button>
     </div>
   );
 }

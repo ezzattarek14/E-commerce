@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-// import { GoArrowLeft } from "react-icons/go";
+
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-// import { IconContext } from "react-icons";
 import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
-// import { useState } from "react";
 
 function Pagination({ totalPost, postPage, setCurrentPage }) {
   const pages = [];
@@ -13,7 +11,6 @@ function Pagination({ totalPost, postPage, setCurrentPage }) {
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [scrollTop, setScrollTop] = useState(0);
 
   const currentPage = !searchParams.get("page")
     ? 1

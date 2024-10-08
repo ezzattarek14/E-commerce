@@ -17,15 +17,15 @@ function Products() {
   if (isLoading) return <Spinner />;
   return (
     <>
-      <div className=" md:px-5 px-5">
-        <ul className="flex  gap-2">
-          <li>{`Home >`}</li>
-          <li>{`Shop >`}</li>
-          <li>{`Men >`}</li>
-        </ul>
-      </div>
+      <div className="flex-col gap-10 container">
+        <div className=" md:px-5 px-5">
+          <ul className="flex  gap-2">
+            <li>{`Home >`}</li>
+            <li>{`Shop >`}</li>
+            <li>{`Men >`}</li>
+          </ul>
+        </div>
 
-      <div className="flex-col gap-10 ">
         <ProductsCollection products={currentPost}></ProductsCollection>
 
         <div className=" flex-row justify-center items-center">

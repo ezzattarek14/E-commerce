@@ -17,7 +17,10 @@ function Button({ children, type, onClick, active }) {
   }
   if (type === "Add") {
     return (
-      <button className="text-white text-xs  sm:text-sm whitespace-nowrap md:text-lg bg-mblack px-10 md:px-20 py-3 rounded-full  w-2/3    ">
+      <button
+        onClick={onClick}
+        className="text-white text-xs  sm:text-sm whitespace-nowrap md:text-lg bg-mblack px-10 md:px-20 py-3 rounded-full  w-2/3    "
+      >
         {children}
       </button>
     );

@@ -23,14 +23,14 @@ function Pagination({ totalPost, postPage, setCurrentPage }) {
     searchParams.set("page", prev);
     setSearchParams(searchParams);
     setCurrentPage(prev);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
   function handleNext() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
     searchParams.set("page", next);
     setSearchParams(searchParams);
     setCurrentPage(next);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -54,7 +54,7 @@ function Pagination({ totalPost, postPage, setCurrentPage }) {
                 searchParams.set("page", page);
                 setSearchParams(searchParams);
                 setCurrentPage(page);
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               key={index}
               active={currentPage == index + 1}

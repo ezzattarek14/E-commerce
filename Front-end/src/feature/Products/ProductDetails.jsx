@@ -15,17 +15,39 @@ import img4 from "../../Assets/productimg4.png";
 import SizeButtons from "../../Components/SizeButtons";
 import Button from "../../ui/Button";
 import Spinner from "../../ui/Spinner";
+import { useCartStore } from "../../Store";
+import toast from "react-hot-toast";
 
 function ProductDetails() {
   const { id } = useParams();
   const { Product, isLoading } = useProduct();
   const [activeimg, setActiveImg] = useState(img4);
   const [active, setActive] = useState(1);
-  const [color, setColor] = useState();
-  const [size, setSize] = useState();
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
   const [count, setCount] = useState(1);
-  console.log(Product);
-  console.log(id);
+  console.log(size);
+
+  const addToCart = useCartStore((state) => state.addToCart);
+  function handleAddItem() {
+    if (!size || !color) {
+      toast.error("Please select a size and color.");
+      return;
+    }
+
+    const newItem = {
+      id: Product?.id,
+      name: Product?.title,
+      price: Product?.price,
+      image: Product?.image,
+      size,
+      color,
+      quantity: count,
+    };
+
+    addToCart(newItem);
+    toast.success("Item added");
+  }
 
   if (isLoading) return <Spinner />;
   return (
@@ -144,31 +166,31 @@ function ProductDetails() {
             <div className="flex gap-3">
               <div
                 className="bg-[#4F4631] rounded-full w-8 h-8 flex items-center justify-center"
-                onClick={() => setColor("#4F4631")}
+                onClick={() => setColor("Brown")}
               >
                 <IoMdCheckmark
                   className={`text-white text-xl ${
-                    color === "#4F4631" ? "block" : "hidden"
+                    color === "Brown" ? "block" : "hidden"
                   }`}
                 />
               </div>
               <div
-                onClick={() => setColor("#314F4A")}
+                onClick={() => setColor("Green")}
                 className="bg-[#314F4A] rounded-full w-8 h-8 flex items-center justify-center"
               >
                 <IoMdCheckmark
                   className={`text-white text-xl ${
-                    color === "#314F4A" ? "block" : "hidden"
+                    color === "Green" ? "block" : "hidden"
                   }`}
                 />
               </div>
               <div
-                onClick={() => setColor("#31344F")}
+                onClick={() => setColor("Purple")}
                 className="bg-[#31344F] rounded-full w-8 h-8 flex items-center justify-center"
               >
                 <IoMdCheckmark
                   className={`text-white text-xl ${
-                    color === "#31344F" ? "block" : "hidden"
+                    color === "Purple" ? "block" : "hidden"
                   }`}
                 />
               </div>
@@ -197,7 +219,9 @@ function ProductDetails() {
                 }}
               />
             </div>
-            <Button type={"Add"}>Add to Cart</Button>
+            <Button type={"Add"} onClick={handleAddItem}>
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>

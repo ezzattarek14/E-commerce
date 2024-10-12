@@ -8,9 +8,12 @@ import Logo from "../ui/Logo";
 import NavbarLinks from "./NavbarLinks";
 import Sidebar from "../Components/Sidebar";
 import { Link } from "react-router-dom";
+import { useCartStore } from "../Store";
 
 function Navbar() {
   const [close, setClose] = useState(false);
+  const cart = useCartStore((state) => state.cart);
+
   return (
     <>
       <header className="flex gap-5  justify-between container py-5 items-center mb-5 ">
@@ -45,7 +48,17 @@ function Navbar() {
             <IoSearchOutline />
           </div>
           <div className="text-2xl ">
-            <FiShoppingCart />
+            <Link to={"/cart"} className="relative">
+              <span
+                className={`${
+                  cart.length === 0 ? "hidden" : "inline-block"
+                } absolute top-3 whitespace-nowrap -mt-4 ms-2.5 rounded-full bg-danger px-[0.4em] py-[0.2em] text-[0.8rem] font-bold leading-none text-white bg-red-600 flex justify-center items-center`}
+              >
+                {cart.length}
+              </span>
+
+              <FiShoppingCart />
+            </Link>
           </div>
           <div className="text-2xl ">
             <FaRegCircleUser />

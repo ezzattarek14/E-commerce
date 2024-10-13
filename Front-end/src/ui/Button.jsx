@@ -3,7 +3,10 @@
 function Button({ children, type, onClick, active }) {
   if (type === "black") {
     return (
-      <button className="text-white bg-mblack whitespace-nowrap px-20 py-4 rounded-full md:w-1/2 w-full ">
+      <button
+        className="text-white bg-mblack whitespace-nowrap px-20 py-4 rounded-full md:w-1/2 w-full "
+        onClick={onClick}
+      >
         {children}
       </button>
     );
@@ -65,6 +68,18 @@ function Button({ children, type, onClick, active }) {
       </button>
     );
   }
+  if (type === "frontPage") {
+    return (
+      <button
+        onClick={onClick}
+        className="text-white font-bold text-xs border-2  sm:text-sm whitespace-nowrap md:text-lg bg-mblack bg-opacity-20 px-10 md:px-10 py-3 rounded-full  w-2/3 hover:bg-white  hover:border-black hover:text-black hover:border-solid hover:scale-105 transition-all ease-in-out duration-150"
+      >
+        {children}
+      </button>
+    );
+  }
+
+  return <button>{children}</button>;
 }
 
 export default Button;

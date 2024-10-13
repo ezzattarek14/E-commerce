@@ -1,11 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import HeroModel from "../../Components/HeroModel";
 import Button from "../../ui/Button";
 import DivMotion from "../../ui/DivMotion";
-
 import Frames from "./Frames";
 import HeroFooter from "./HeroFooter";
 
 function HeroSection() {
+  const nav = useNavigate();
   return (
     <div>
       <DivMotion>
@@ -23,7 +24,15 @@ function HeroSection() {
                 of style.
               </p>
 
-              <Button type={"black"}>Shop Now</Button>
+              <Button
+                type={"black"}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  nav("/login");
+                }}
+              >
+                Shop Now
+              </Button>
             </div>
             <Frames />
           </div>

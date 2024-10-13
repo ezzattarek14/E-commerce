@@ -8,6 +8,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Cart from "./pages/Cart";
 import { Toaster } from "react-hot-toast";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+// import FrontPage from "./pages/FrontPage";
+import FrontPageLayout from "./Components/FrontPageLayout";
 
 function App() {
   const queryClient = new QueryClient({
@@ -21,6 +25,11 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
+          <Route element={<FrontPageLayout></FrontPageLayout>}>
+            {/* <Route path="/form" element={<FrontPage></FrontPage>} /> */}
+            <Route path="/login" element={<Login></Login>} />
+            <Route path="/signup" element={<Signup></Signup>} />
+          </Route>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/categories" element={<Categories />} />

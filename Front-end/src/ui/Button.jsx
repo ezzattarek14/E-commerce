@@ -79,6 +79,17 @@ function Button({ children, type, onClick, active }) {
     );
   }
 
+  if (type === "nav") {
+    return (
+      <button
+        onClick={onClick}
+        className="bg-black py-2 px-4  hover:z-20 inline-block  text-white md:px-5 md:py-2 border-solid border-2 border-white hover:text-black hover:bg-white transition duration-500 ease-in-out hover:border-2 hover:border-black whitespace-normal rounded-full"
+      >
+        {children}
+      </button>
+    );
+  }
+
   return <button>{children}</button>;
 }
 

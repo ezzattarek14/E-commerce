@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "../../ui/Button";
 import CollectionCard from "./CollectionCard";
 import DivMotion from "../../ui/DivMotion";
+import { islogged } from "../../services/Auth";
 
 /* eslint-disable react/prop-types */
 
@@ -23,7 +24,11 @@ function CollectionSection({ data, title }) {
           ))}
         </div>
         <Button type={"white"}>
-          <Link to={"/products"}> View All</Link>
+          {islogged() ? (
+            <Link to={"/products"}> View All</Link>
+          ) : (
+            <Link to={"/signup"}> View All</Link>
+          )}
         </Button>
       </div>
     </DivMotion>

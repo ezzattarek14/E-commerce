@@ -3,7 +3,7 @@ import validator from "validator";
 
 export const SignUpSchema = z
   .object({
-    username: z.string().min(1, "Invalid input"),
+    name: z.string().min(1, "Invalid input"),
     email: z.string().email(),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),

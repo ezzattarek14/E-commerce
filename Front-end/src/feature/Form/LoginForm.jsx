@@ -6,13 +6,19 @@ import { useForm } from "react-hook-form";
 import { LoginSchema } from "../../utils/LoginSchema.js";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "../../ui/FormError.jsx";
+import { logInUser } from "../../services/apiUser.js";
+import { logIn } from "../../services/Auth.js";
+import toast from "react-hot-toast";
 
 const onLoginSubmit = async (data) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    const res = await logInUser(data);
+    console.log("data sent to backend", res);
+    return res;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };
 
@@ -26,9 +32,14 @@ function LoginForm() {
     <form
       className="space-y-4 md:space-y-6 text-right"
       onSubmit={LoginHook.handleSubmit(async (data) => {
-        await onLoginSubmit(data);
-        LoginHook.reset();
-        nav("/products");
+        const res = await onLoginSubmit(data);
+       
+        if (res.status === "success") {
+          LoginHook.reset();
+          nav("/products");
+          logIn(res.token, res.user.name);
+          toast.success(`logged in successfuly`);
+        }
       })}
     >
       {/* Email input */}

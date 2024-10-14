@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import StarRating from "../../ui/StarRating";
 import { formatCurrency } from "../../utils/helper";
-function ProductCard({ id, img, title, rating, price }) {
+function ProductCard({ id, img, title, price }) {
   return (
     <div className="text-start flex-col h-full gap-5 p-5 justify-between relative">
       <div>
         <div className="flex justify-center min-w-full">
           <img
-            src={img}
+            src={img[0]}
             alt={`product img number ${id}`}
             className="rounded-xl max-h-48"
           />
@@ -23,7 +23,7 @@ function ProductCard({ id, img, title, rating, price }) {
             maxrating={5}
             size={24}
             key={1234}
-            defaultRating={rating}
+            defaultRating={Math.floor(Math.random() * (5 - 2) + 2) }
             text={true}
           />
         </div>

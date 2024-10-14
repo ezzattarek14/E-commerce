@@ -57,3 +57,4 @@ function App() {
 }
 
 export default App;
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;

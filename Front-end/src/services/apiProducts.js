@@ -1,3 +1,4 @@
+import { backendUrl } from "../App";
 export async function getProduct(id) {
   const req = await fetch(`https://fakestoreapi.com/products/${id}`);
   if (!req) {
@@ -8,11 +9,11 @@ export async function getProduct(id) {
 }
 
 export async function getProducts() {
-  const res = await fetch("https://fakestoreapi.com/products");
-  if (!res.ok) {
+  const response = await fetch(backendUrl + "/api/product/list"); // Adjust the URL if needed
+  const data = await response.json();
+  if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
-  const data = await res.json();
-
-  return data;
+  // console.log("query data : ", data);
+  return data.products;
 }

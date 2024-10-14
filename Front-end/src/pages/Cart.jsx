@@ -1,6 +1,6 @@
-import Cartdetails from "../feature/cart/Cartdetails";
-import EmptyCart from "../feature/cart/EmptyCart";
-import OrderSummary from "../feature/cart/OrderSummary";
+import Cartdetails from "../feature/Cart/Cartdetails";
+import EmptyCart from "../feature/Cart/EmptyCart";
+import OrderSummary from "../feature/Cart/OrderSummary";
 import { useCartStore } from "../Store";
 
 function Cart() {

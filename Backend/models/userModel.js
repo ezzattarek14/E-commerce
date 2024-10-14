@@ -46,6 +46,7 @@ const UserModelSchema = mongoose.Schema({
     type: Date,
     default: Date.now, // Automatically set the current date
   },
+  cartData: { type: Object, default: {} },
   passwordChangedAt: Date, //helps in authentication
   resetPasswordToken: String, //token will be generated when user asks for password reset
   resetPasswordTokenExpiresAt: Date,

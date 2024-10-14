@@ -20,7 +20,7 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
     const err = new CustomError(
       "please provide email address and password to login",
       400,
-      "error"
+      "fail"
     );
     next(err);
   }
@@ -31,7 +31,7 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
     const err = new CustomError(
       "wrong email or password, please check again...",
       400,
-      "wrong password/email"
+      "fail"
     );
     return next(err);
   }
@@ -46,13 +46,14 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
 });
 
 //user register controller
-const registerUser = asyncErrorHandler(async (req, res) => {
+const registerUser = asyncErrorHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
 
   // check user already exists or not
   const exists = await userModel.findOne({ email });
   if (exists) {
-    return res.json({ success: false, message: "User Already Exists" });
+    next(new CustomError("User Not found", 400, "fail"));
+    return;
   }
 
   //creating the user

@@ -52,7 +52,7 @@ const registerUser = asyncErrorHandler(async (req, res, next) => {
   // check user already exists or not
   const exists = await userModel.findOne({ email });
   if (exists) {
-    next(new CustomError("User Not found", 400, "fail"));
+    next(new CustomError("user already exists", 400, "fail"));
     return;
   }
 

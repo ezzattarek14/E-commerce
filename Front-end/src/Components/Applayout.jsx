@@ -40,7 +40,7 @@ function AppLayout() {
     // if(isLoading)
     return (
       <div className="min-h-screen flex items-center justify-center flex-col bg-white">
-        <img className=" animate-pulse mb-5" src={logo} alt="Logo" />
+        <img className="w-1/5 animate-pulse mb-5" src={logo} alt="Logo" />
         <div className="animate-spin rounded-full sm:size-16 size-10 border-t-2 border-b-2 border-mblack"></div>
       </div>
     );

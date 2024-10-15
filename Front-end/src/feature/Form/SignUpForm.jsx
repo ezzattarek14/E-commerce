@@ -36,7 +36,7 @@ function SignUpForm() {
         const res = await onSignUpSubmit(data);
         if (res.status === "success") {
           SignUpHook.reset();
-          nav("/products");
+          nav("/");
           logIn(res.token, res.user.name);
           toast.success(`signed up successfuly`);
         }

@@ -32,3 +32,7 @@
     transform: rotate(1turn);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}

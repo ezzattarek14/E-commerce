@@ -13,45 +13,47 @@ function OrderSummary() {
   );
   console.log(totalPrice);
   return (
-    <div className="w-2/3 md:w-2/3 space-y-7 p-2">
-      {/* order summary title */}
+    <div className="mt-6 grow  w-full md:w-1/3 sm:mt-8 lg:mt-0 ">
       <h1 className="font-bold text-xl md:text-2xl capitalize">
         order summary
       </h1>
+      <div className="space-y-4 rounded-lg rounded-br-none  rounded-bl-none border border-gray-100 bg-gray-50 p-6 ">
+        <div className="space-y-2">
+          <dl className="flex items-center justify-between gap-4">
+            <dt className="text-base font-normal text-gray-500">
+              Original price
+            </dt>
+            <dd className="text-base font-medium text-gray-900">
+              {formatCurrency(totalPrice)}
+            </dd>
+          </dl>
 
-      {/* total price, discount, and delivery */}
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-gray-400 text-lg md:text-xl">Subtotal</span>
-          <span className="text-lg md:text-xl font-bold">
-            {formatCurrency(totalPrice)}
-          </span>
+          <dl className="flex items-center justify-between gap-4">
+            <dt className="text-base font-normal text-gray-500">Savings</dt>
+            <dd className="text-base font-medium text-red-500">
+              -{formatCurrency(discount)}
+            </dd>
+          </dl>
+
+          <dl className="flex items-center justify-between gap-4">
+            <dt className="text-base font-normal text-gray-500">
+              Delivery Fee
+            </dt>
+            <dd className="text-base font-medium text-gray-900 ">
+              {formatCurrency(delivery)}
+            </dd>
+          </dl>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-400 text-lg md:text-xl">Discount</span>
-          <span className="text-red-600 text-lg md:text-xl font-bold">
-            {`-${formatCurrency(discount)}`}
-          </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-400 text-lg md:text-xl">Delivery Fee</span>
-          <span className="text-lg md:text-xl font-bold">
-            {formatCurrency(delivery)}
-          </span>
-        </div>
+
+        <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 ">
+          <dt className="text-base font-bold text-gray-900 ">Total</dt>
+          <dd className="text-base font-bold text-gray-900 ">
+            {formatCurrency(totalPrice - discount - delivery)}
+          </dd>
+        </dl>
       </div>
-
-      {/* total price */}
-      <div className="flex justify-between items-center">
-        <span className="font-semibold text-lg md:text-xl">Total</span>
-        <span className="text-lg md:text-xl font-bold">
-          {formatCurrency(totalPrice - discount + delivery)}
-        </span>
-      </div>
-
-      {/* button of the checkout */}
-      <button className="flex items-center text-base md:text-xl justify-center font-semibold gap-2 text-white bg-mblack w-full py-3 md:py-4 rounded-full transition-all duration-500 ease-in-out hover:bg-white hover:text-mblack cursor-pointer whitespace-nowrap">
-        Go to Checkout <BsArrowRight />
+      <button className="flex items-center text-base md:text-xl justify-center font-semibold gap-2 text-white bg-mblack w-full  py-2 md:py-3 rounded-2xl rounded-tr-none rounded-tl-none transition-all duration-500 ease-in-out hover:bg-white hover:text-mblack cursor-pointer whitespace-nowrap">
+        Go to Checkout <BsArrowRight />{" "}
       </button>
     </div>
   );

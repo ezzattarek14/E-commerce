@@ -33,10 +33,10 @@ function LoginForm() {
       className="space-y-4 md:space-y-6 text-right"
       onSubmit={LoginHook.handleSubmit(async (data) => {
         const res = await onLoginSubmit(data);
-       
+
         if (res.status === "success") {
           LoginHook.reset();
-          nav("/products");
+          nav(`/`);
           logIn(res.token, res.user.name);
           toast.success(`logged in successfuly`);
         }

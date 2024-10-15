@@ -1,21 +1,32 @@
 /* eslint-disable react/prop-types */
 
+import { useNavigate } from "react-router-dom";
+
 function NavbarLinks({ type, setClose }) {
+  const nav = useNavigate();
   if (type === "col")
     return (
-      <div className="flex gap-16 items-start justify-between w-full">
+      <div className="flex gap-10 items-start justify-between w-full">
         <ul className="flex-col space-y-3">
-          <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
+          <li
+            className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+            onClick={() => nav("/products")}
+          >
             Shop
           </li>
-          <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-            On Sale
+
+          <li
+            className="whitespace-nowrap hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+            onClick={() => nav("/")}
+          >
+            <a href="#newArrivals">New Arrivals</a>
           </li>
-          <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-            New Arrivals
-          </li>
-          <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-            Brands
+          <li
+            id="new"
+            className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+            onClick={() => nav("/")}
+          >
+            <a href="#category">catogories</a>
           </li>
         </ul>
         <button
@@ -28,18 +39,24 @@ function NavbarLinks({ type, setClose }) {
     );
   else {
     return (
-      <ul className="flex gap-5">
-        <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
+      <ul className="flex gap-16 text-xl font-bold">
+        <li
+          onClick={() => nav("/")}
+          className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+        >
           Shop
         </li>
-        <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-          On Sale
+        <li
+          onClick={() => nav("/")}
+          className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+        >
+          <a href="#newArrivals">New Arrivals</a>
         </li>
-        <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-          New Arrivals
-        </li>
-        <li className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer">
-          Brands
+        <li
+          onClick={() => nav("/")}
+          className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+        >
+          <a href="#category">catogories</a>
         </li>
       </ul>
     );

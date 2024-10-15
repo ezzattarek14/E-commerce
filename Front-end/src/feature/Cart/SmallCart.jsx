@@ -42,9 +42,6 @@ function SmallCart({ id, img, name, quantity, color, size, price }) {
           <div className="text-sm">
             Size: <span className="text-sm text-gray-400">{size}</span>
           </div>
-          <div className="text-sm">
-            Color: <span className="text-sm text-gray-400">{color}</span>
-          </div>
         </div>
 
         {/* Quantity and price controls */}

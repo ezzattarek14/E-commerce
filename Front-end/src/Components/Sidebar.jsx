@@ -2,7 +2,7 @@ import NavbarLinks from "./NavbarLinks";
 
 /* eslint-disable react/prop-types */
 
-function Sidebar({ close }) {
+function Sidebar({ close ,setClose}) {
   return (
     <div
       className={`top-0 right-0 w-[35vw] bg-mblack p-5 pr-16 text-white fixed h-full z-40  ease-in-out duration-300 ${
@@ -10,7 +10,7 @@ function Sidebar({ close }) {
       }`}
     >
       <div>
-        <NavbarLinks type={"col"} />
+        <NavbarLinks type={"col"} setClose={setClose} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ function islogged() {
   // Get a cookie
   const value = Cookies.get("Token");
 
-  console.log("value", value);
+  // console.log("value", value);
 
   return value ? true : false;
 }

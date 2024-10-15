@@ -44,7 +44,7 @@ function Products() {
           <ul className="flex  gap-2">
             <li>{`Home >`}</li>
             <li>{`Shop >`}</li>
-            <li>{`Men >`}</li>
+            <li>{`All categories `}</li>
           </ul>
         </div>
 

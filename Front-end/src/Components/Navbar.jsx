@@ -3,7 +3,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import { useState } from "react";
-
 import Cookies from "js-cookie";
 import Logo from "../ui/Logo";
 import NavbarLinks from "./NavbarLinks";
@@ -102,7 +101,7 @@ function Navbar() {
           )}
         </div>
       </header>
-      <Sidebar close={close} />
+      <Sidebar close={close}  setClose={setClose} />
     </>
   );
 }

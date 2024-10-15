@@ -13,7 +13,7 @@ function Button({ children, type, onClick, active }) {
   }
   if (type === "white") {
     return (
-      <button className="text-mblack bg-white whitespace-nowrap rounded-full font-semibold text-xl px-20 py-4 border border-gray-500 md:w-1/5 w-full">
+      <button className="text-mblack hover:text-white  hover:bg-mblack transition duration-500 ease-in-out  bg-white whitespace-nowrap rounded-full font-semibold text-base md:text-xl px-10 py-2  md:px-20  md:py-4 border border-gray-500 ">
         {children}
       </button>
     );
@@ -83,7 +83,7 @@ function Button({ children, type, onClick, active }) {
     return (
       <button
         onClick={onClick}
-        className="bg-black py-2 px-4  hover:z-20 inline-block  text-white md:px-5 md:py-2 border-solid border-2 border-white hover:text-black hover:bg-white transition duration-500 ease-in-out hover:border-2 hover:border-black whitespace-normal rounded-full"
+        className="bg-black py-1 px-3 text-sm hover:z-20 inline-block  text-white md:px-5 md:py-2 border-solid border-2 border-white hover:text-black hover:bg-white transition duration-500 ease-in-out hover:border-2 hover:border-black whitespace-normal rounded-full"
       >
         {children}
       </button>

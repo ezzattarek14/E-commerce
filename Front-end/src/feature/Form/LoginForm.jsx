@@ -63,7 +63,10 @@ function LoginForm() {
         register={LoginHook.register}
         required={true}
       ></FormInput>
-      <span className=" w-full cursor-pointer pr-5 items-center mt-0 text-sm font-medium text-gray-500 hover:underline hover:text-black">
+      <span
+        onClick={() => nav("/forgotPass")}
+        className=" w-full cursor-pointer pr-5 items-center mt-0 text-sm font-medium text-gray-500 hover:underline hover:text-black"
+      >
         Forgot password?
       </span>
       <FormError

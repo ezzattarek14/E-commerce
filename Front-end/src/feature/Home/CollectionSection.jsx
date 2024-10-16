@@ -11,7 +11,7 @@ function CollectionSection({ data, title }) {
   return (
     <DivMotion>
       <div
-        id="newArrivals"
+        id="bestseller"
         className="container flex flex-col gap-10 justify-center items-center my-16 pb-20 border-b-2 border-gray-400"
       >
         <h1 className="font-extrabold text-5xl uppercase mb-10">{title}</h1>

@@ -29,9 +29,11 @@ function UserOrders() {
 
   if (Orders?.length === 0)
     return (
-      <div className="container flex justify-center items-center h-80">
+      <div className="container capitalize flex justify-center items-center h-80">
         <Link to={"/"}>
-          <h1 className="font-bold text-5xl">Soon..</h1>
+          <h1 className="font-bold text-3xl text-center">
+            {"you don't have orders yet..."}
+          </h1>
         </Link>
       </div>
     );
@@ -47,7 +49,10 @@ function UserOrders() {
           </ul>
         </div>
 
-        <OrdersCollection firstIndex={firstIndex} orders={currentPost}></OrdersCollection>
+        <OrdersCollection
+          firstIndex={firstIndex}
+          orders={currentPost}
+        ></OrdersCollection>
 
         {pageCount > 1 && (
           <div className="flex-row justify-center items-center">

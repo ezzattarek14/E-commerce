@@ -14,6 +14,10 @@ import Signup from "./pages/Signup";
 import FrontPageLayout from "./Components/FrontPageLayout";
 import BestSeller from "./pages/BestSeller";
 import UserOrders from "./pages/userOrders";
+import ForgotPass from "./pages/ForgotPassword";
+// import ResetPassForm from "./feature/Form/ResetPasswordForm";
+import ResetPassPage from "./pages/ResetPasswordPage";
+import Orders from "./pages/Orders";
 
 function App() {
   const queryClient = new QueryClient({
@@ -31,6 +35,8 @@ function App() {
             {/* <Route path="/form" element={<FrontPage></FrontPage>} /> */}
             <Route path="/login" element={<Login></Login>} />
             <Route path="/signup" element={<Signup></Signup>} />
+            <Route path="/forgotPass" element={<ForgotPass></ForgotPass>} />
+            <Route path="/resetpassword/:token" element={<ResetPassPage />} />
           </Route>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
@@ -40,6 +46,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/verify" element={<UserOrders></UserOrders>} />
+            <Route path="/order/:id" element={<Orders />} />
           </Route>
         </Routes>
         <Toaster

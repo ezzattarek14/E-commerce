@@ -12,14 +12,14 @@ function NavbarLinks({ type, setClose }) {
             className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
             onClick={() => nav("/products")}
           >
-            Shop
+            <a href="#home">Shop</a>
           </li>
 
           <li
             className="whitespace-nowrap hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
             onClick={() => nav("/")}
           >
-            <a href="#newArrivals">New Arrivals</a>
+            <a href="#bestseller">Best Seller</a>
           </li>
           <li
             id="new"
@@ -27,6 +27,13 @@ function NavbarLinks({ type, setClose }) {
             onClick={() => nav("/")}
           >
             <a href="#category">catogories</a>
+          </li>
+          <li
+            id="new"
+            className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+            onClick={() => nav("/verify")}
+          >
+            Orders
           </li>
         </ul>
         <button
@@ -44,19 +51,25 @@ function NavbarLinks({ type, setClose }) {
           onClick={() => nav("/")}
           className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
         >
-          Shop
+          <a href="#home">Shop</a>
         </li>
         <li
           onClick={() => nav("/")}
           className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
         >
-          <a href="#newArrivals">New Arrivals</a>
+          <a href="#bestseller">Best Seller</a>
         </li>
         <li
           onClick={() => nav("/")}
           className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
         >
           <a href="#category">catogories</a>
+        </li>
+        <li
+          onClick={() => nav("/verify")}
+          className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
+        >
+          Orders
         </li>
       </ul>
     );

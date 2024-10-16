@@ -9,7 +9,7 @@ import { islogged } from "../../services/Auth";
 function HeroSection() {
   const nav = useNavigate();
   return (
-    <div>
+    <div id="home">
       <DivMotion>
         <div className="flex w-full flex-col lg:flex-row gap-5 lg:gap-20 items-center  justify-center container">
           <div className="space-y-6 text-center md:text-start   md:space-y-20 flex flex-col md:flex-row  md:block ">

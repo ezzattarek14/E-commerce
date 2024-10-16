@@ -5,6 +5,8 @@ import { backendUrl } from "../App";
 // import { useCartStore } from "../Store";
 
 export async function payCOD(orderData, cartData) {
+  const token = Cookies.get("Token");
+
   console.log("orderData", orderData);
   const address = {
     address: orderData.address,
@@ -23,8 +25,10 @@ export async function payCOD(orderData, cartData) {
   const response = await fetch(backendUrl + "/api/order/place", {
     method: "POST", // Specify the method
     headers: {
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json", // Ensure the server knows you're sending JSON
     },
+
     body: JSON.stringify(reqBody), // Send the user data as JSON in the request body
   });
 
@@ -40,7 +44,8 @@ export async function payCOD(orderData, cartData) {
 }
 
 export async function payStripe(orderData, cartData) {
-  console.log("orderData", orderData);
+  // console.log("orderData", orderData);
+  const token = Cookies.get("Token");
   const address = {
     address: orderData.address,
     city: orderData.city,
@@ -58,6 +63,7 @@ export async function payStripe(orderData, cartData) {
   const response = await fetch(backendUrl + "/api/order/stripe", {
     method: "POST", // Specify the method
     headers: {
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json", // Ensure the server knows you're sending JSON
     },
     body: JSON.stringify(reqBody), // Send the user data as JSON in the request body

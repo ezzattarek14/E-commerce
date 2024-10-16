@@ -1,9 +1,19 @@
 import toast from "react-hot-toast";
 import { backendUrl } from "../App";
+import Cookies from "js-cookie";
+
 export async function getProduct(id) {
-  console.log("fetching"), id;
+  const token = Cookies.get("Token");
+  console.log("fetching", id);
   const response = await fetch(
-    backendUrl + `/api/product/single/?productId=${id}`
+    backendUrl + `/api/product/single/?productId=${id}`,
+    {
+      method: "GET", // or 'POST' if you're sending data
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
   );
 
   const data = await response.json();
@@ -18,10 +28,16 @@ export async function getProduct(id) {
   return product; // Return the response data
 }
 
-
 //get all products
 export async function getProducts() {
-  const response = await fetch(backendUrl + "/api/product/list"); // Adjust the URL if needed
+  const token = Cookies.get("Token");
+  const response = await fetch(backendUrl + "/api/product/list", {
+    method: "GET", // or 'POST' if you're sending data
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }); // Adjust the URL if needed
   const data = await response.json();
   if (!response.ok) {
     throw new Error("Failed to fetch data");

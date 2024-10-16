@@ -18,7 +18,7 @@ function CollectionSection({ data, title }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 items-center">
           {Coll_data?.map((item, index) => (
             <CollectionCard
-              img={item.image}
+              img={islogged() ? item.image[0] : item.image}
               price={item.price}
               rating={Math.floor(Math.random() * (5 - 4) + 4)}
               title={item.name}

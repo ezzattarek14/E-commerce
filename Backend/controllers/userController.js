@@ -74,6 +74,7 @@ const registerUser = asyncErrorHandler(async (req, res, next) => {
 const forgotPassword = asyncErrorHandler(async (req, res, next) => {
   //checks if user exists
   const email = req.body.email;
+  const { origin } = req.headers;
   const user = await userModel.findOne({ email });
   if (!user) {
     next(new CustomError("User Not found"));
@@ -87,9 +88,7 @@ const forgotPassword = asyncErrorHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //send the mail to the user
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/user/resetpassword/${resetToken}`;
+  const resetUrl = `${origin}/resetpassword/${resetToken}`;
 
   const message = `We have recieved a password reset request. Please use the below link to reset your password \n\n ${resetUrl}\n\n this like will expire after 10 minute`;
   const subject = `password reset request`;
@@ -122,6 +121,7 @@ const forgotPassword = asyncErrorHandler(async (req, res, next) => {
 const resetPassword = asyncErrorHandler(async (req, res, next) => {
   //checking if reset Token provided
   let { password, confirmPassword } = req.body;
+  console.log(req.params.Token);
   if (!req.params.Token) {
     return next(new CustomError("no Token porvided, please try again"));
   }
@@ -139,7 +139,7 @@ const resetPassword = asyncErrorHandler(async (req, res, next) => {
 
   const user = await userModel.findOne({
     resetPasswordToken: Token,
-    resetPasswordTokenExpiresAt: { $gte: Date.now() },
+    // resetPasswordTokenExpiresAt: { $gte: Date.now() },
   });
 
   if (!user) {

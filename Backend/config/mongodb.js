@@ -1,27 +1,13 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
 dotenv.config();
-
 const connectDB = async () => {
-  mongoose.connection.on("connected", () => {
-    console.log("DB Connected");
-  });
-  await mongoose.connect(`${process.env.MONGODB_URI}`);
-};
-export default connectDB;
 
-// import mongoose from 'mongoose';
-// import dotenv from 'dotenv';
+    mongoose.connection.on('connected',() =>{
+        console.log("DB Connected")
+    })
 
-// dotenv.config();
-// const connectDB = async () => {
+    await mongoose.connect(`${process.env.MONGODB_URI}/Ecommerce`)
 
-//     mongoose.connection.on('connected',() =>{
-//         console.log("DB Connected")
-//     })
-
-//     await mongoose.connect(`${process.env.MONGODB_URI}/Ecommerce`)
-
-// }
-// export default connectDB
+}
+export default connectDB

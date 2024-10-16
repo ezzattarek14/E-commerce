@@ -9,6 +9,7 @@ import {
 } from "../controllers/orderController.js";
 import adminAuth from "../middleware/adminAuth.js";
 import authUser from "../middleware/userAuth.js";
+import userAuthorized from "../middleware/userAuth.js";
 
 const orderRouter = express.Router();
 
@@ -17,10 +18,10 @@ orderRouter.post("/list", adminAuth, allOrders);
 orderRouter.post("/status", adminAuth, updateStatus);
 
 // Payment Features
-orderRouter.post("/place", placeOrder);
-orderRouter.post("/stripe", placeOrderStripe);
+orderRouter.post("/place",userAuthorized, placeOrder);
+orderRouter.post("/stripe",userAuthorized, placeOrderStripe);
 // User Feature
-orderRouter.get("/userorders", userOrders);
+orderRouter.get("/userorders",userAuthorized, userOrders);
 
 // verify payment
 

@@ -24,8 +24,8 @@ function SmallCart({ id, img, name, quantity, color, size, price }) {
         {/* Title and delete button */}
         <div className="flex justify-between mb-2">
           <h1 className="font-bold text-base md:text-xl capitalize">
-            {name.split(" ").length > 8
-              ? name.split(" ").slice(0, 6).join(" ")
+            {name?.split(" ").length > 8
+              ? name?.split(" ").slice(0, 6).join(" ")
               : name}
           </h1>
           <RiDeleteBin6Fill

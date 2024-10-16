@@ -37,7 +37,7 @@ function LoginForm() {
         if (res.status === "success") {
           LoginHook.reset();
           nav(`/`);
-          logIn(res.token, res.user.name);
+          logIn(res.user._id, res.token, res.user.name);
           toast.success(`logged in successfuly`);
         }
       })}

@@ -19,7 +19,7 @@ function SampleNextArrow({ className, style, onClick }) {
       }}
       onClick={onClick}
     >
-      <GrLinkNext className="text-mblack" size={20} />
+      <GrLinkNext className="text-mblack " size={20} />
     </div>
   );
 }
@@ -88,7 +88,7 @@ function ReviewSection() {
         <h1 className="font-extrabold text-5xl uppercase mb-10">
           OUR HAPPY CUSTOMERS
         </h1>
-        <div className="hidden md:block">
+        <div className="hidden m-10 md:block">
           <Slider {...settings}>
             {data.map((item, index) => (
               <Review
@@ -100,7 +100,7 @@ function ReviewSection() {
             ))}
           </Slider>
         </div>
-        <div className="block md:hidden">
+        <div className="block md:hidden p-10">
           <Slider {...RespSettings}>
             {data.map((item, index) => (
               <Review

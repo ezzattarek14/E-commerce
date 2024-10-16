@@ -10,9 +10,10 @@ function islogged() {
   return value ? true : false;
 }
 
-function logIn(token, username) {
+function logIn(userId, token, username) {
   // console.log(user);
   // Set a cookie
+  Cookies.set("userId", userId);
   Cookies.set("Token", token);
   Cookies.set("username", username);
   window.location.reload();
@@ -21,7 +22,8 @@ function logIn(token, username) {
 function logOut(clearCart) {
   Cookies.remove("Token");
   Cookies.remove("username");
-  Cookies.remove("user");
+  Cookies.set("userId");
+
   clearCart();
   window.location.reload();
 }

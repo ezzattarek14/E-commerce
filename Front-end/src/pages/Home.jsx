@@ -7,20 +7,29 @@ import img2 from "../Assets/img2.png";
 import img3 from "../Assets/img3.png";
 import img4 from "../Assets/img4.png";
 import CategoriesCard from "../feature/Categories/CategoriesCard";
-
+import { useProducts } from "../feature/Products/useProducts";
 
 function Home() {
   const data = [
-    { img: img1, price: 200, rating: 4, title: "T-SHIRT WITH TAPE DETAILS" },
-    { img: img2, price: 240, rating: 3, title: "SKINNY FIT JEANS" },
-    { img: img3, price: 180, rating: 4, title: "CHECKERED SHIRT" },
-    { img: img4, price: 130, rating: 5, title: "SLEEVE STRIPED T-SHIRT" },
+    { image: img1, price: 200, name: "T-SHIRT WITH TAPE DETAILS" },
+    { image: img2, price: 240, name: "SKINNY FIT JEANS" },
+    { image: img3, price: 180, name: "CHECKERED SHIRT" },
+    { image: img4, price: 130, name: "SLEEVE STRIPED T-SHIRT" },
   ];
+  const { Products } = useProducts();
+  const testData = Products?.filter((item) => item.bestseller === true);
+  let BestSellerData = data;
+
+  if (testData?.length === 0) {
+    BestSellerData = data;
+  } else {
+    BestSellerData = testData?.slice(0, 4);
+  }
 
   return (
     <div>
       <HeroSection />
-      <CollectionSection title={"New Arrivals"} data={data} />
+      <CollectionSection title={"Best Seller"} data={BestSellerData} />
       <CategoriesCard />
       {/* <CollectionSection title={"top selling"} data={data2} /> */}
       <ReviewSection />

@@ -6,7 +6,7 @@ function NavbarLinks({ type, setClose }) {
   const nav = useNavigate();
   if (type === "col")
     return (
-      <div className="flex gap-10 items-start justify-between w-full">
+      <div className="flex gap-10 items-start mt-2 justify-between w-full capitalize">
         <ul className="flex-col space-y-3">
           <li
             className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"
@@ -39,7 +39,7 @@ function NavbarLinks({ type, setClose }) {
     );
   else {
     return (
-      <ul className="flex gap-16 text-xl font-bold">
+      <ul className="flex gap-16 text-xl font-bold capitalize">
         <li
           onClick={() => nav("/")}
           className="hover:text-gray-400 duration-300 ease-in-out transition-all cursor-pointer"

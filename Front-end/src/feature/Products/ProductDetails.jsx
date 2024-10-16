@@ -38,7 +38,7 @@ function ProductDetails() {
   const [active, setActive] = useState(1);
   const [size, setSize] = useState("");
   const [count, setCount] = useState(1);
-  console.log("here:", Product);
+  // console.log("here:", Product);
 
   // SHOW MORE
 
@@ -102,7 +102,6 @@ function ProductDetails() {
                     setActive(index);
                   }}
                 />
-                
               );
             })}
           </div>

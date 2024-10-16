@@ -36,3 +36,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+.logo {
+  height: 45px;
+  width: 100%;
+}

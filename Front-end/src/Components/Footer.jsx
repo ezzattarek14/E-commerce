@@ -1,11 +1,11 @@
 import FooterLinks from "../ui/FooterLinks";
-import Logo from "../ui/Logo";
 import { FaInstagram } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import RightCopyFooter from "./RightCopyFooter";
 import DivMotion from "../ui/DivMotion";
+import LogoFooter from "../ui/LogoFooter";
 
 function Footer() {
   return (
@@ -14,7 +14,7 @@ function Footer() {
         <footer className="container justify-items-start grid grid-row-2 md:flex my-12 gap-10 md:gap-0">
           <div className="space-y-4 md:space-y-10 md:w-1/3">
             <div className="w-32">
-              <Logo />
+              <LogoFooter />
             </div>
             <p className="text-gray-600 w-2/3 ">
               We have clothes that suits your style and which you’re proud to

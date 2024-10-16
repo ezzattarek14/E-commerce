@@ -37,7 +37,7 @@ function SignUpForm() {
         if (res.status === "success") {
           SignUpHook.reset();
           nav("/");
-          logIn(res.token, res.user.name);
+          logIn(res.user._id, res.token, res.user.name);
           toast.success(`signed up successfuly`);
         }
       })}

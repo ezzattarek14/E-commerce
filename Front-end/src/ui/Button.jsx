@@ -4,7 +4,7 @@ function Button({ children, type, onClick, active }) {
   if (type === "black") {
     return (
       <button
-        className="text-white bg-mblack whitespace-nowrap px-20 py-4 rounded-full md:w-1/2 w-full "
+        className="text-white bg-mblack whitespace-nowrap px-10 py-4 rounded-full border-2 hover:bg-white hover:text-black transition duration-500 ease-in-out border-black "
         onClick={onClick}
       >
         {children}

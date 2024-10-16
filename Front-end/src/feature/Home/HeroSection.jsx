@@ -3,7 +3,7 @@ import HeroModel from "../../Components/HeroModel";
 import Button from "../../ui/Button";
 import DivMotion from "../../ui/DivMotion";
 import Frames from "./Frames";
-import HeroFooter from "./HeroFooter";
+// import HeroFooter from "./HeroFooter";
 import { islogged } from "../../services/Auth";
 
 function HeroSection() {
@@ -11,8 +11,8 @@ function HeroSection() {
   return (
     <div>
       <DivMotion>
-        <div className="flex flex-col lg:flex-row gap-5 lg:gap-20 items-center  justify-center container">
-          <div className="space-y-6 md:space-y-20 flex flex-col md:flex-row  md:block ">
+        <div className="flex w-full flex-col lg:flex-row gap-5 lg:gap-20 items-center  justify-center container">
+          <div className="space-y-6 text-center md:text-start   md:space-y-20 flex flex-col md:flex-row  md:block ">
             <div className="space-y-6">
               <h1 className="font-extrabold text-5xl ">
                 FIND CLOTHES <br /> THAT MATCHES <br /> YOUR STYLE
@@ -40,7 +40,7 @@ function HeroSection() {
 
           <HeroModel />
         </div>
-        <HeroFooter />
+        {/* <HeroFooter /> */}
       </DivMotion>
     </div>
   );

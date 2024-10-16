@@ -1,4 +1,3 @@
-
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
@@ -19,9 +18,9 @@ function Navbar() {
   const clearCart = useCartStore((state) => state.clearCart);
   const nav = useNavigate();
   return (
-    <>
-      <header className="flex gap-5  justify-between container py-5 items-center mb-5 ">
-        <div className="w-36 flex items-center gap-4  ">
+    <div className="w-full flex justify-center">
+      <header className="flex gap-5  justify-between shadow-lg shadow-black-500/50 fixed bg-white z-50  container py-4 items-center mb-5 ">
+        <div className="w-36 flex items-center gap-4 ">
           <div
             className="text-mblack text-3xl md:hidden"
             onClick={() => setClose(!close)}
@@ -37,7 +36,6 @@ function Navbar() {
           <div className="md:block hidden">
             <NavbarLinks />
           </div>
-       
         </div>
         <div className="flex justify-center  gap-3">
           {islogged() ? (
@@ -94,7 +92,7 @@ function Navbar() {
         </div>
       </header>
       <Sidebar close={close} setClose={setClose} />
-    </>
+    </div>
   );
 }
 

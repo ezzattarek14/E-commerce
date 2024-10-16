@@ -5,8 +5,16 @@ import { formatCurrency } from "../../utils/helper";
 function CollectionCard({ img, id, title, rating, price }) {
   return (
     <div className="text-start">
-      <img src={img} alt={`product img number ${id}`} className="rounded-xl" />
-      <h2 className="font-bold text-xl ">{title}</h2>
+      <img
+        src={img}
+        alt={`product img number ${id}`}
+        className="rounded-xl p-10"
+      />
+      <h2 className="font-bold md:text-xl  text-base whitespace-nowrap">
+        {title?.split(" ").length > 4
+          ? title.split(" ").slice(0, 3).join(" ")
+          : title}
+      </h2>
       <div>
         <StarRating
           maxrating={5}

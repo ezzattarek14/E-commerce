@@ -20,7 +20,7 @@ orderRouter.post("/status", adminAuth, updateStatus);
 orderRouter.post("/place", placeOrder);
 orderRouter.post("/stripe", placeOrderStripe);
 // User Feature
-orderRouter.post("/userorders", authUser, userOrders);
+orderRouter.get("/userorders", userOrders);
 
 // verify payment
 

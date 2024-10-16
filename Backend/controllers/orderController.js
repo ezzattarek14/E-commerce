@@ -78,8 +78,8 @@ const placeOrderStripe = async (req, res) => {
     });
 
     const session = await stripe.checkout.sessions.create({
-      success_url: `${origin}/verify?success=true$orderId=${newOrder._id}`,
-      cancel_url: `${origin}/verify?success=false$orderId=${newOrder._id}`,
+      success_url: `${origin}/verify?success=true&orderId=${newOrder._id}&userId=${userId}`,
+      cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}&userId=${userId}`,
       line_items,
       mode: "payment",
     });
@@ -121,8 +121,9 @@ const allOrders = async (req, res) => {
 
 //  User Order data for Front-end
 const userOrders = async (req, res) => {
+  const userId = req.query.userId;
   try {
-    const { userId } = req.body;
+    console.log("userId", userId);
     const orders = await orderModel.find({ userId });
     res.json({ success: true, orders });
   } catch (error) {

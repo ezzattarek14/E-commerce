@@ -52,7 +52,7 @@ function Products() {
 
         <div className=" flex-row justify-center items-center">
           <Pagination
-            totalPost={Products.length}
+            totalPost={Products?.length}
             postPage={PAGE_SIZE}
             setCurrentPage={setCurrentPage}
           />

@@ -18,6 +18,8 @@ export async function getProduct(id) {
   return product; // Return the response data
 }
 
+
+//get all products
 export async function getProducts() {
   const response = await fetch(backendUrl + "/api/product/list"); // Adjust the URL if needed
   const data = await response.json();

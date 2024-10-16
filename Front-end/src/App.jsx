@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 // import FrontPage from "./pages/FrontPage";
 import FrontPageLayout from "./Components/FrontPageLayout";
 import BestSeller from "./pages/BestSeller";
+import UserOrders from "./pages/userOrders";
 
 function App() {
   const queryClient = new QueryClient({
@@ -38,6 +39,7 @@ function App() {
             <Route path="/BestSeller" element={<BestSeller />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/verify" element={<UserOrders></UserOrders>} />
           </Route>
         </Routes>
         <Toaster

@@ -75,7 +75,7 @@ function PaymentForm({ setPayForm, orderSummary }) {
           if (stripe) {
             window.location.href = res.session_url;
           } else {
-            nav("/cart");
+            nav("/verify");
           }
         }
       })}

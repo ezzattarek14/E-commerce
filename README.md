@@ -1,136 +1,76 @@
-# E-commerce
+# Coder-Fit: Tech-Themed E-commerce Platform
 
-DEPI final Project
+Coder Fit is an e-commerce platform tailored for developers, offering a wide range of tech-themed apparel and accessories. From witty code snippet t-shirts to hoodies adorned with programming icons, Coder Fit enables tech enthusiasts to showcase their passion for technology through fashion. 
 
-Typical file system for eCommerce web aplication
+## Website Links
+- **Website**: [Coder Fit](https://coder-fit.vercel.app/)  
+- **Admin Dashboard**: [Coder Admin](https://coder-admin.vercel.app/)
 
-## Root structure
+---
 
-```
-/ecommerce-app
-│
-├── /backend # Backend (Node.js, Express.js, MongoDB)
-│ ├── /config # Configuration files (e.g., database, environment variables)
-│ ├── /controllers# Business logic for the app (CRUD operations)
-│ ├── /models # Mongoose models for MongoDB
-│ ├── /routes # Express routes (API endpoints)
-│ ├── /middleware # Middleware (auth, error handling, etc.)
-│ ├── /utils # Utility functions (email sending, token generation, etc.)
-│ ├── /data # (Optional) Seeding data for the database
-│ ├── /validators # Request validation (using libraries like Joi)
-│ ├── server.js # Main backend entry point for Express app
-│ └── package.json# Backend dependencies and scripts
-│
-├── /frontend # Frontend (React.js)
-│ ├── /src
-│ │ ├── /components # Reusable React components (e.g., product card, navbar, etc.)
-│ │ ├── /pages # React pages (e.g., Home, ProductDetails, Cart, Checkout)
-│ │ ├── /context # Context API files (e.g., global state management)
-│ │ ├── /hooks # Custom React hooks
-│ │ ├── /services # Frontend API services (e.g., productService.js)
-│ │ ├── /assets # Static assets like images, fonts, icons, etc.
-│ │ ├── /styles # Global styles (CSS or SCSS)
-│ │ ├── /reducers # Redux reducers (if using Redux for state management)
-│ │ ├── /actions # Redux actions
-│ │ ├── /App.js # Main React App component
-│ │ └── index.js # Entry point for React app
-│ └── package.json # Frontend dependencies and scripts
-│
-├── .gitignore # Ignored files for Git
-├── README.md # Project documentation
-└── /node_modules # Installed dependencies
-```
+## Objectives
 
-## Backend Structure (Node.js, Express, MongoDB)
+- **Enhance Brand Awareness**: Reach developers and tech enthusiasts worldwide.  
+- **Personalized Shopping**: Deliver a seamless and customized user experience.  
+- **Customer Retention**: Ensure loyalty through exceptional support and rewards.  
+- **Scalable Platform**: Support global expansion with robust infrastructure.  
+- **Secure Transactions**: Provide reliable payment gateways for safe purchases.
 
-```
-/backend
-│
-├── /config
-│ └── db.js # MongoDB connection configuration
-│ └── env.js # Environment variables configuration (port, secret keys)
-│
-├── /controllers
-│ └── productController.js # Product-related logic (CRUD)
-│ └── userController.js # User-related logic (authentication, profile)
-│ └── orderController.js # Order-related logic (cart, checkout)
-│
-├── /models
-│ └── productModel.js # Mongoose schema for Product
-│ └── userModel.js # Mongoose schema for User
-│ └── orderModel.js # Mongoose schema for Orders
-│
-├── /routes
-│ └── productRoutes.js # Routes for product API (GET, POST, PUT, DELETE)
-│ └── userRoutes.js # Routes for user-related API (login, register, profile)
-│ └── orderRoutes.js # Routes for order-related API (create, payment)
-│
-├── /middleware
-│ └── authMiddleware.js # Middleware to check JWT token
-│ └── errorMiddleware.js # Global error handling
-│
-├── /utils
-│ └── token.js # Token generation utility
-│ └── email.js # Email sending utility
-│
-├── /data # Optional seeding data for development
-│ └── products.js
-│
-├── /validators # Optional - validation using libraries like Joi
-│ └── productValidator.js # Validation logic for product input
-│
-├── server.js # Main entry point for Express app
-└── package.json # Backend dependencies (e.g., express, mongoose, bcrypt, etc.)
-```
+---
 
-## Frontend Structure (React.js)
+## Key Features
 
-```
-/frontend
-├── /src
-│ ├── /components
-│ │ └── Navbar.js # Navbar component
-│ │ └── ProductCard.js # Product card component
-│ │ └── Cart.js # Shopping cart component
-│ │ └── Footer.js # Footer component
-│
-│ ├── /pages
-│ │ └── Home.js # Homepage component
-│ │ └── ProductDetails.js # Single product detail page
-│ │ └── CartPage.js # Cart page component
-│ │ └── CheckoutPage.js # Checkout page component
-│ │ └── OrderHistory.js # User order history page
-│
-│ ├── /context # Global state management using Context API
-│ │ └── CartContext.js # Context for cart
-│ │ └── AuthContext.js # Context for user authentication
-│
-│ ├── /hooks
-│ │ └── useCart.js # Custom hook to manage cart state
-│ │ └── useAuth.js # Custom hook for authentication
-│
-│ ├── /services
-│ │ └── productService.js # API calls related to products
-│ │ └── userService.js # API calls related to users
-│ │ └── orderService.js # API calls related to orders
-│
-│ ├── /assets # Static files (images, fonts, icons)
-│ │ └── logo.png # Logo image
-│
-│ ├── /styles # Global stylesheets (CSS or SCSS)
-│ │ └── global.css # Global styles
-│ │ └── product.css # Styles for product component
-│
-│ ├── /reducers # If using Redux
-│ │ └── cartReducer.js # Reducer logic for cart
-│ │ └── authReducer.js # Reducer logic for authentication
-│
-│ ├── /actions # Redux actions
-│ │ └── cartActions.js # Actions related to cart
-│ │ └── authActions.js # Actions related to authentication
-│
-│ ├── App.js # Main App component
-│ └── index.js # Entry point (renders the React app)
-│
-└── package.json # Frontend dependencies (React, Axios, Redux, etc.)
-```
+### 1. Tech-Themed Product Catalog
+- **Overview**: Offers a curated collection of apparel and accessories inspired by programming languages, humor, and tech icons.  
+- **Highlights**: Detailed product info, including images, price, sizes, and colors.  
+- **Categories**: Men, women, and kids.
+
+### 2. User Authentication
+- **Overview**: Secure login and account management with JWT (JSON Web Tokens).  
+- **Features**: Register, login, reset passwords, and access account settings.  
+- **Benefit**: Ensures data privacy and smooth account control.
+
+### 3. Error Handling
+- **Overview**: Displays clear, user-friendly error messages for better navigation.  
+- **Examples**: Failed logins, payment errors, or unavailable products.  
+- **Benefit**: Reduces frustration and improves user satisfaction.
+
+### 4. Categorization & Filtering
+- **Overview**: Products are organized by gender, size, and color.  
+- **Benefit**: Helps users find relevant items quickly.
+
+### 5. Order Management
+- **Overview**: Allows customers to track their order history and statuses.  
+- **Admin Features**: Manage order placements and deliveries.
+
+### 6. Payment Gateway Integration
+- **Overview**: Secure payments via Stripe and Cash on Delivery (COD).  
+- **Features**: Real-time status updates and payment notifications.  
+- **Benefit**: Ensures safe and flexible transactions.
+
+### 7. Responsive Design
+- **Overview**: Optimized browsing experience for mobile and desktop.  
+- **Features**: Dynamic animations for desktop; streamlined layouts for mobile.  
+- **Benefit**: Ensures usability across devices.
+
+### 8. Admin Dashboard
+- **Overview**: Centralized control for managing inventory and orders.  
+- **Features**: Add/edit/delete products, track orders, and handle returns.  
+- **Benefit**: Simplifies operational management.
+
+### 9. Permission Guards
+- **Overview**: Role-based access control with tokens.  
+- **Features**: Admins manage products and orders; customers access personal data.  
+- **Benefit**: Prevents unauthorized access to sensitive areas.
+
+### 10. Real-Time Data Synchronization
+- **Overview**: Instant updates across the platform for changes like inventory and order statuses.  
+- **Technology**: Real-Time APIs.  
+- **Benefit**: Ensures users and admins always view the latest information.
+
+---
+
+## Get Started
+Explore Coder Fit and join the growing community of developers expressing their love for tech through fashion!  
+- **Website**: [Coder Fit](https://coder-fit.vercel.app/)  
+- **Admin Dashboard**: [Coder Admin](https://coder-admin.vercel.app/)

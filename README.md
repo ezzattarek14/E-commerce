@@ -74,3 +74,7 @@ Coder Fit is an e-commerce platform tailored for developers, offering a wide ran
 Explore Coder Fit and join the growing community of developers expressing their love for tech through fashion!  
 - **Website**: [Coder Fit](https://coder-fit.vercel.app/)  
 - **Admin Dashboard**: [Coder Admin](https://coder-admin.vercel.app/)
+
+## Project report
+- **Report**: [Report](https://drive.google.com/file/d/1ltAmzRgnVfXL-PjVQBfnPLqtW3uS1d3R/view?usp=drive_link)
+- **Presentation**: [Presentation](https://docs.google.com/presentation/d/1nC1h6SGl4ZSGU2Qsu5BkBQjf8q4R8T6g/edit?usp=drive_link&ouid=100669555505994572380&rtpof=true&sd=true)

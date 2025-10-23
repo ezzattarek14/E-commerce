@@ -63,10 +63,10 @@ jobs:
 
       # Step 8: Move cache (if scan passed)
 
-      - name: Move Docker cache
-        run: |
-            rm -rf /tmp/.buildx-cache
-            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+#      - name: Move Docker cache
+#        run: |
+#            rm -rf /tmp/.buildx-cache
+#            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
 
       # Step 9: Push image to ECR

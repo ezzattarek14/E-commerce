@@ -52,7 +52,7 @@ jobs:
       # Step 7: Scan Docker image with Trivy
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.65.0
         with:
           image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
           format: 'json'

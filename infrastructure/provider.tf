@@ -11,9 +11,11 @@ terraform {
     key     = "terraform.tfstate"
     region  = "us-east-1"
     encrypt = true
+    profile = "depi"
   }
 }
 
 provider "aws" {
   region = var.region
+  profile = "depi"
 }

@@ -76,12 +76,33 @@ jobs:
 
       # Step 8: Move cache (if scan passed)
 
+      - name: Move Docker cache
+        run: |
+            rm -rf /tmp/.buildx-cache
+            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
 
       # Step 9: Push image to ECR
 
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.ECR_REPO }}:${{ github.sha }}
 
-      # Step 10: Set up Prometheus and Grafana
+      # Step 10: Deploy to EKS
 
 
-      # Step 11: Slack notification
+      # Step 11: Set up Prometheus and Grafana
+
+
+      # Step 12: Slack notification
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          payload: |
+            {
+              "text": "✅ *Deployment Success!* Image pushed to ECR: `${{ secrets.ECR_REPO }}:${{ github.sha }}`"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 

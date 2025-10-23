@@ -54,7 +54,7 @@ jobs:
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ secrets.ECR_REPO }}:${{ github.sha }}
+          image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
           format: 'json'
           exit-code: '1'
           vuln-type: 'os,library'

@@ -102,14 +102,5 @@ jobs:
 
 
       # Step 12: Slack notification
-      - name: Notify Slack
-        uses: slackapi/slack-github-action@v2.1.1
-        with:
-          payload: |
-            {
-              "text": "✅ *Deployment Success!* Image pushed to ECR: `${{ secrets.ECR_REPO }}:${{ github.sha }}`"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
+     
 

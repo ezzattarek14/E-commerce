@@ -6,20 +6,20 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1                   # your preferred AWS region
-  ECR_REPOSITORY: e-commerce-app          # Amazon ECR repository name
-  CONTAINER_NAME: e-commerce-container    # container name in task definition
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: e-commerce-app
+  CONTAINER_NAME: e-commerce-container
 
 jobs:
   run-test-scan:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Docker Buildx for advanced caching
+      # Step 2: Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -31,24 +31,25 @@ jobs:
           SONAR_PROJECT_KEY: sonar-test-e-commerce_e-commerce-application
           SONAR_ORGANIZATION: sonar-test-e-commerce
 
-      # Step 4: Log in to Amazon ECR
+      # Step 4: Configure AWS credentials
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        uses: aws-actions/configure-aws-credentials@v0.7.0
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      # Step 5: Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+        uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 5: Build Docker image
+      # Step 6: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
 
-      # Step 6: Scan Docker image with Trivy
+      # Step 7: Scan Docker image with Trivy
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@0.28.0
         with:
@@ -57,12 +58,6 @@ jobs:
           exit-code: '0'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-
-      # Step 7: Move Docker cache (optional)
-#      - name: Move Docker cache
-#        run: |
-#            rm -rf /tmp/.buildx-cache
-#            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
       # Step 8: Push Docker image to ECR (optional)
 #      - name: Push Docker image
@@ -75,7 +70,7 @@ jobs:
 #      - name: Deploy to EKS
 #        run: echo "Deployment step placeholder"
 
-      # Step 10: Set up Prometheus and Grafana (placeholder)
+      # Step 10: Prometheus/Grafana setup (placeholder)
 #      - name: Setup Monitoring
 #        run: echo "Prometheus & Grafana setup placeholder"
 

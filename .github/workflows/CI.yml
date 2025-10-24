@@ -26,10 +26,13 @@ jobs:
       # Step 3: SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1
-        env:
-          SONAR_TOKEN: 0595444f20a937907db669bdd04b747b740e9f70
-          SONAR_PROJECT_KEY: sonar-test-e-commerce_e-commerce-application
-          SONAR_ORGANIZATION: sonar-test-e-commerce
+        with:
+          args: >
+           -Dsonar.login=0595444f20a937907db669bdd04b747b740e9f70
+           -Dsonar.projectKey=sonar-test-e-commerce
+           -Dsonar.organization=sonar-test-e-commerce
+           -Dsonar.sources=.
+
 
       # Step 4: Log in to Amazon ECR
       - name: Configure AWS credentials

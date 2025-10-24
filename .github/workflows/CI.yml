@@ -25,7 +25,7 @@ jobs:
 
       # Step 3: SonarCloud Scan
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@v1
         env:
           SONAR_TOKEN: 0595444f20a937907db669bdd04b747b740e9f70
           SONAR_PROJECT_KEY: sonar-test-e-commerce_e-commerce-application

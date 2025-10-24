@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 env:
-  AWS_REGION: us-east-1                   # your preferred AWS region
-  ECR_REPOSITORY: e-commerce-app          # Amazon ECR repository name
-  CONTAINER_NAME: e-commerce-container    # container name in task definition
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: e-commerce-app
+  CONTAINER_NAME: e-commerce-container
+  SONAR_PROJECT_KEY: sonar-test-e-commerce_new-sonarscan
+  SONAR_ORGANIZATION: sonar-test-e-commerce
 
 jobs:
   run-test-scan:
@@ -23,16 +26,30 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Step 3: SonarCloud Scan
+      # --- 🔹 Added SonarCloud (before Step 3) ---
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-           -Dsonar.login=0595444f20a937907db669bdd04b747b740e9f70
-           -Dsonar.projectKey=sonar-test-e-commerce
-           -Dsonar.organization=sonar-test-e-commerce
-           -Dsonar.sources=.
+            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ env.SONAR_ORGANIZATION }}
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=.
+            -Dsonar.java.binaries=.
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.branch.name=master
+      # --- 🔹 End SonarCloud Section ---
 
+      # Step 3: Cache Docker layers
 
       # Step 4: Log in to Amazon ECR
       - name: Configure AWS credentials
@@ -46,12 +63,12 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
 
-      # Step 5: Build Docker image
+      # Step 6: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
 
-      # Step 6: Scan Docker image with Trivy
+      # Step 7: Scan Docker image with Trivy
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@0.28.0
         with:
@@ -61,27 +78,9 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
-      # Step 7: Move Docker cache (optional)
-#      - name: Move Docker cache
-#        run: |
-#            rm -rf /tmp/.buildx-cache
-#            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # Step 9: Push image to ECR
+      # (commented out)
 
-      # Step 8: Push Docker image to ECR (optional)
-#      - name: Push Docker image
-#        run: |
-#            IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}"
-#            docker tag ${{ env.ECR_REPOSITORY }}:${{ github.sha }} "$IMAGE_URI"
-#            docker push "$IMAGE_URI"
-
-      # Step 9: Deploy to EKS (placeholder)
-#      - name: Deploy to EKS
-#        run: echo "Deployment step placeholder"
-
-      # Step 10: Set up Prometheus and Grafana (placeholder)
-#      - name: Setup Monitoring
-#        run: echo "Prometheus & Grafana setup placeholder"
-
-      # Step 11: Slack notification (placeholder)
-#      - name: Slack Notification
-#        run: echo "Slack notification placeholder"
+      # Step 10: Deploy to EKS
+      # Step 11: Set up Prometheus and Grafana
+      # Step 12: Slack notification

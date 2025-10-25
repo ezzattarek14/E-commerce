@@ -77,6 +77,12 @@ jobs:
           exit-code: '0'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+         
+      - name: Upload Trivy scan results
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-scan-results
+          path: trivy-results.json        
 
       # Step 9: Push image to ECR
       # (commented out)

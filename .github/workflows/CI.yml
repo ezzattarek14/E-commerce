@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # using tag v4 :contentReference[oaicite:0]{index=0}
+        uses: actions/checkout@v4  
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3  # using tag v3 :contentReference[oaicite:1]{index=1}
+        uses: docker/setup-buildx-action@v3  
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -72,7 +72,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0  # tag v0.28.0 :contentReference[oaicite:2]{index=2}
+        uses: aquasecurity/trivy-action@0.28.0  
         with:
           image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
           format: 'sarif'

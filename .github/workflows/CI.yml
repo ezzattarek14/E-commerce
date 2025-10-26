@@ -39,10 +39,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build project for SonarScanner
-        run: |
-          # Compile binaries without running tests
-          mvn clean package -DskipTests
+     
 
       - name: Run SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2

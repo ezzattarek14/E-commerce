@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@a5ac7e51f3c30864cf2b2b8256da7246b15f3972  # v4.2.2
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -29,7 +29,7 @@ jobs:
           java-version: 11
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@b63f5ed676fe7cfa1a3ebad1a3fbb71b5c460e9a  # v2.3.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -49,10 +49,10 @@ jobs:
     needs: sonar-scan  # runs after SonarCloud passes
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@a5ac7e51f3c30864cf2b2b8256da7246b15f3972  # v4.2.2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@5e4d2b653f76a9f99d5d9c8820596c434efad9e3  # v3.6.1
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
@@ -102,4 +102,4 @@ jobs:
         run: |
           curl -X POST -H 'Content-type: application/json' \
           --data "{\"text\":\"❌ *CI Pipeline Failed!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: $GITHUB_SHA\"}" \
-          $SL
+          $SLACK_WEBHOOK_URL

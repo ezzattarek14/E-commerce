@@ -55,7 +55,7 @@ jobs:
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
             -Dsonar.qualitygate.wait=true
             -Dsonar.branch.name=main
-            -Dsonar.coverage.exclusions=**/*   # skip coverage to prevent failures
+            -Dsonar.coverage.exclusions=**/*   
 
   # =========================
   # Job 2: Docker Build & Scan

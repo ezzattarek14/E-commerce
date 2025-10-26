@@ -15,7 +15,6 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
-  # Job 1: Code Quality & Security Scanning
   code-analysis:
     runs-on: ubuntu-latest
     outputs:
@@ -24,13 +23,13 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
-          fetch-depth: 0  # Important for SonarCloud analysis
+          fetch-depth: 0
 
       # Step 2: Set up Java for SonarCloud
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@99b8673ff64fbf99d8d175f23978bb914c5d7dc2 # v3.13.0
         with:
           distribution: temurin
           java-version: 11
@@ -38,7 +37,7 @@ jobs:
       # Step 3: SonarCloud Scan
       - name: SonarCloud Scan
         id: sonar-scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@b415c2c32fe8f377153b49e1a5a4c534e4d1b7f7 # v2.1.1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -59,7 +58,6 @@ jobs:
           echo "SonarCloud analysis completed with status: ${{ steps.sonar-scan.outputs.quality-gate-status }}"
           echo "status=${{ steps.sonar-scan.outputs.quality-gate-status }}" >> $GITHUB_OUTPUT
 
-  # Job 2: Build and Security Scan (depends on code-analysis)
   build-and-scan:
     runs-on: ubuntu-latest
     needs: code-analysis
@@ -68,15 +66,15 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       # Step 2: Set up Docker Buildx
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@4d134d8b2c8fe6e09c6dbf607d44a0f1a8f7b3d5 # v3.0.0
 
       # Step 3: Configure AWS credentials
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83 # v2.2.0
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -85,7 +83,7 @@ jobs:
       # Step 4: Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a # v1.6.0
 
       # Step 5: Build Docker image
       - name: Build Docker image
@@ -94,7 +92,7 @@ jobs:
 
       # Step 6: Scan Docker image with Trivy
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@d71c64a8c6c81c3bd0b11e57e06de8b4b9f3d3e8 # 0.28.0
         with:
           image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
           format: 'sarif'
@@ -105,11 +103,10 @@ jobs:
 
       # Step 7: Upload Trivy results to GitHub Security Dashboard
       - name: Upload Trivy results to GitHub Security Dashboard
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@6c089f6bc4a5b1e98b5ff563898035a5e9242b0a # v3.24.0
         with:
-          sarif_file: trivy-results.sarif
+          sarif_file: 'trivy-results.sarif'
 
-  # Job 3: Notifications (runs after all jobs complete)
   notifications:
     runs-on: ubuntu-latest
     needs: [code-analysis, build-and-scan]

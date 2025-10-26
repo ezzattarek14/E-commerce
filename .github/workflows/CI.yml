@@ -47,7 +47,7 @@ jobs:
             -Dsonar.java.binaries=.
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
             -Dsonar.qualitygate.wait=true
-            -Dsonar.branch.name=master
+            -Dsonar.branch.name=main
       # --- 🔹 End of Step 3: SonarCloud Analysis Section ---
 
       # Step 4: Configure AWS credentials

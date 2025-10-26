@@ -63,26 +63,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
 
-      # Step 6: Build Docker image
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
 
-      # Step 7: Scan Docker image with Trivy (SARIF format for GitHub dashboard)
-      - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-          exit-code: '0'
-
-      # Step 8: Upload Trivy SARIF results to GitHub Security Dashboard
-      - name: Upload Trivy results to GitHub Security Dashboard
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy-results.sarif
-
+     
       

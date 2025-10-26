@@ -86,6 +86,3 @@ jobs:
           sarif_file: trivy-results.sarif
 
       
-          curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"❌ *CI Pipeline Failed!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: $GITHUB_SHA\"}" \
-          $SLACK_WEBHOOK_URL

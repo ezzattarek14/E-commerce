@@ -5,7 +5,7 @@ on:
     branches:
       - main
   pull_request:
-  
+
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: e-commerce-app
@@ -15,26 +15,22 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
-  run-test-scan:
+  # ======================================
+  # 🔹 Job 1: Test + SonarCloud Scan
+  # ======================================
+  test-and-scan:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # --- 🔹 Step 3: SonarCloud Analysis Section ---
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 11
 
-      # Step 3.1: Cache SonarCloud packages
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:
@@ -42,7 +38,6 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      # Step 3.2: Run SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
@@ -57,27 +52,46 @@ jobs:
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**
             -Dsonar.qualitygate.wait=true
             -Dsonar.branch.name=main
-      # --- 🔹 End of Step 3: SonarCloud Analysis Section ---
 
-      # Step 4: Configure AWS credentials
+  # ======================================
+  # 🔹 Job 2: Docker Build + Scan + Push
+  # ======================================
+  docker-build-and-push:
+    runs-on: ubuntu-latest
+    needs: test-and-scan  # Runs after tests & Sonar scan
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # Step 5: Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+        uses: aws-actions/amazon-ecr-login@v2
 
-      # Step 6: Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
+          docker build --cache-from=type=local,src=/tmp/.buildx-cache \
+                       --cache-to=type=local,dest=/tmp/.buildx-cache-new \
+                       -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
 
-      # Step 7: Scan Docker image with Trivy (SARIF format for GitHub dashboard)
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
@@ -88,24 +102,37 @@ jobs:
           severity: 'CRITICAL,HIGH'
           exit-code: '0'
 
-      # Step 8: Upload Trivy SARIF results to GitHub Security Dashboard
       - name: Upload Trivy results to GitHub Security Dashboard
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-results.sarif
 
-      # --- 🔹 Step 9: Slack Success Notification ---
+      - name: Push Docker image to ECR
+        run: |
+          docker tag ${{ env.ECR_REPOSITORY }}:${{ github.sha }} \
+          ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+          docker push \
+          ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+  # ======================================
+  # 🔹 Job 3: Slack Notifications
+  # ======================================
+  notifications:
+    runs-on: ubuntu-latest
+    needs: [test-and-scan, docker-build-and-push]
+
+    steps:
       - name: Send Slack Success Notification
         if: success()
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"✅ *CI Pipeline Succeeded!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: $GITHUB_SHA\"}" \
+          --data "{\"text\":\"✅ *CI Pipeline Succeeded!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: <$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA|$GITHUB_SHA>\"}" \
           $SLACK_WEBHOOK_URL
 
-      # --- 🔹 Step 10: Slack Failure Notification ---
       - name: Send Slack Failure Notification
         if: failure()
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"❌ *CI Pipeline Failed!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: $GITHUB_SHA\"}" \
+          --data "{\"text\":\"❌ *CI Pipeline Failed!*\nRepository: $GITHUB_REPOSITORY\nBranch: $GITHUB_REF_NAME\nCommit: <$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA|$GITHUB_SHA>\"}" \
           $SLACK_WEBHOOK_URL

@@ -16,6 +16,8 @@ env:
 jobs:
   run-test-scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write    # Required for publishing to GitHub Pages
 
     steps:
       # Step 1: Check out the repository
@@ -92,7 +94,14 @@ jobs:
           name: trivy-dashboard
           path: trivy-report.html
 
-      # (Optional) Step 9: Push image to ECR or deploy steps
-      # - name: Push Docker image to ECR
-      #   run: |
-      #     docker push ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+      # --- 🔹 Step 9: Publish Trivy Dashboard to GitHub Pages ---
+      - name: Deploy Trivy Dashboard to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          keep_files: true
+          destination_dir: trivy-dashboard
+          full_commit_message: "Update Trivy security dashboard"

@@ -45,7 +45,7 @@ jobs:
             -Dsonar.java.binaries=.
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
             -Dsonar.qualitygate.wait=true
-            -Dsonar.branch.name=master
+            -Dsonar.branch.name=${{ github.ref_name }}
 
       # --- 🔹 Step 4: Configure AWS credentials ---
       - name: Configure AWS credentials

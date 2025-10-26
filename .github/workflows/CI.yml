@@ -51,7 +51,7 @@ jobs:
 
       # Step 3: Configure AWS credentials
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -60,28 +60,31 @@ jobs:
       # Step 4: Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+        uses: aws-actions/amazon-ecr-login@v2
 
       # Step 5: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
-      # Step 6: Scan Docker image with Trivy (SARIF format for GitHub dashboard)
-      - name: Scan Docker image with Trivy
+
+      # --- 🔹 Step 6: Scan Docker image with Trivy (HTML dashboard) ---
+      - name: Scan Docker image with Trivy (HTML dashboard)
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: 'template'
+          template: '@/contrib/html.tpl'
+          output: 'trivy-report.html'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           exit-code: '0'
 
-      # Step 7: Upload Trivy SARIF results to GitHub Security Dashboard
-      - name: Upload Trivy results to GitHub Security Dashboard
-        uses: github/codeql-action/upload-sarif@v3
+      # --- 🔹 Step 7: Upload Trivy Dashboard as Artifact ---
+      - name: Upload Trivy Dashboard
+        uses: actions/upload-artifact@v4
         with:
-          sarif_file: trivy-results.sarif
+          name: trivy-dashboard
+          path: trivy-report.html
 
       # (Optional) Step 8: Push image to ECR or deploy steps
       # - name: Push Docker image to ECR

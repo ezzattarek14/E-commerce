@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  pull_request:  
   
 env:
   AWS_REGION: us-east-1
@@ -45,7 +46,7 @@ jobs:
             -Dsonar.java.binaries=.
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
             -Dsonar.qualitygate.wait=true
-            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.branch.name=master
 
       # --- 🔹 Step 4: Configure AWS credentials ---
       - name: Configure AWS credentials
